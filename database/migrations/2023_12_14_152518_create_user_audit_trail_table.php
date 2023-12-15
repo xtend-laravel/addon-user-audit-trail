@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_audit_trail', function (Blueprint $table) {
+        Schema::create('xtend_user_audit_trail', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->ipAddress()->nullable();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_audit_trail');
+        Schema::dropIfExists('xtend_user_audit_trail');
     }
 };

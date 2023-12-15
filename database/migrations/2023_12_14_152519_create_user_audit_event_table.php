@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_audit_events', function (Blueprint $table) {
+        Schema::create('xtend_user_audit_events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_audit_trail_id');
             $table->string('event');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_audit_events');
+        Schema::dropIfExists('xtend_user_audit_events');
     }
 };

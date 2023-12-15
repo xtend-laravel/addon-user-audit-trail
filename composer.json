@@ -9,7 +9,9 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "XtendLunar\\Addons\\UserAuditTrail\\": "src/"
+            "XtendLunar\\Addons\\UserAuditTrail\\": "src/",
+            "UserAuditTrail\\Database\\Factories\\": "database/factories/",
+            "UserAuditTrail\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "authors": [
