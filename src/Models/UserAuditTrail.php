@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserAuditTrail extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'xtend_user_audit_trail';
 
     protected $casts = [
