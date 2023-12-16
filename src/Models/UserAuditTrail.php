@@ -20,6 +20,14 @@ class UserAuditTrail extends Model
         'location' => 'array',
     ];
 
+    protected $fillable = [
+        'user_id',
+        'ip_address',
+        'device',
+        'location',
+        'country',
+    ];
+
     protected static function newFactory(): UserAuditTrailFactory
     {
         return UserAuditTrailFactory::new();
