@@ -18,19 +18,14 @@ class RecordUserTrailAction extends Action
     {
         $clientIp = $request->server('HTTP_CLIENT_IP_ADDRESS');
 
-        $userTrail = new UserAuditTrail();
-        $userTrail->user_id = $request->user()?->id;
-        $userTrail->ip_address = $clientIp;
-        $userTrail->device = $this->getAgentInfo();
-        $userTrail->location = $this->getLocation($clientIp);
-        $userTrail->country = $this->getCountry($clientIp);
-        $userTrail->save();
-        
-        // $userTrail->events()->create([
-        //     'event' => 'viewed',
-        //     'visits_nb' => 1,
-        //     'last_visited_at' => now(),
-        // ]);
+        UserAuditTrail::query()->updateOrCreate([
+            'ip_address' => $clientIp,
+        ], [
+            'user_id' => $request->user()?->id,
+            'device' => $this->getAgentInfo(),
+            'location' => $this->getLocation($clientIp),
+            'country' => $this->getCountry($clientIp),
+        ]);
 
         return ok();
     }
