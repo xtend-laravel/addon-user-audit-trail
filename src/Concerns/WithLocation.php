@@ -4,10 +4,9 @@ namespace XtendLunar\Addons\UserAuditTrail\Concerns;
 
 trait WithLocation
 {
-    protected function getLocation(): array
+    protected function getLocation(string $clientIp): array
     {
-        $publicIP = request()->ip();
-        $location = json_decode(file_get_contents("http://ip-api.com/json/{$publicIP}"), true);
+        $location = json_decode(file_get_contents("http://ip-api.com/json/{$clientIp}"), true);
 
         if (!$location) {
             return [];
@@ -27,8 +26,8 @@ trait WithLocation
         ];
     }
 
-    protected function getCountry(): string
+    protected function getCountry(string $clientIp): string
     {
-        return $this->getLocation()['country'];
+        return $this->getLocation($clientIp)['country'];
     }
 }

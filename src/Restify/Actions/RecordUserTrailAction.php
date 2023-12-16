@@ -16,26 +16,22 @@ class RecordUserTrailAction extends Action
 
     public function handle(Request $request, Collection $models): \Illuminate\Http\JsonResponse
     {
-        return data([
-            'server' => $request->server(),
-            'ip' => $request->ip(),
-            'device' => $this->getAgentInfo(),
-        ]);
+        $clientIp = $request->server('HTTP_CLIENT_IP_ADDRESS');
 
-        // $userTrail = new UserAuditTrail();
-        // $userTrail->user_id = $request->user()?->id;
-        // $userTrail->ip_address = $request->ip();
-        // $userTrail->device = $this->getAgentInfo();
-        // $userTrail->location = $this->getLocation();
-        // $userTrail->country = $this->getCountry();
-        //
-        // $userTrail->save();
+        $userTrail = new UserAuditTrail();
+        $userTrail->user_id = $request->user()?->id;
+        $userTrail->ip_address = $clientIp;
+        $userTrail->device = $this->getAgentInfo();
+        $userTrail->location = $this->getLocation($clientIp);
+        $userTrail->country = $this->getCountry($clientIp);
+        $userTrail->save();
+        
         // $userTrail->events()->create([
         //     'event' => 'viewed',
         //     'visits_nb' => 1,
         //     'last_visited_at' => now(),
         // ]);
-        //
-        // return ok();
+
+        return ok();
     }
 }
