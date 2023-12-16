@@ -4,7 +4,7 @@ namespace XtendLunar\Addons\UserAuditTrail\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use XtendLunar\Addons\PageBuilder\Models\Widget;
+use XtendLunar\Addons\UserAuditTrail\Models\UserAuditTrail;
 
 class UserAuditTrailPolicy
 {
@@ -15,7 +15,7 @@ class UserAuditTrailPolicy
         return true;
     }
 
-    public function show(User $user = null, Widget $model): bool
+    public function show(User $user = null, UserAuditTrail $model): bool
     {
         return true;
     }
@@ -30,22 +30,22 @@ class UserAuditTrailPolicy
         return false;
     }
 
-    public function update(User $user, Widget $model): bool
+    public function update(User $user, UserAuditTrail $model): bool
     {
         return true;
     }
 
-    public function updateBulk(User $user, Widget $model): bool
+    public function updateBulk(User $user, UserAuditTrail $model): bool
     {
         return false;
     }
 
-    public function deleteBulk(User $user, Widget $model): bool
+    public function deleteBulk(User $user, UserAuditTrail $model): bool
     {
         return false;
     }
 
-    public function delete(User $user, Widget $model): bool
+    public function delete(User $user, UserAuditTrail $model): bool
     {
         return false;
     }
