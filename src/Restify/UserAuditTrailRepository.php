@@ -14,6 +14,8 @@ class UserAuditTrailRepository extends Repository
 {
     public static string $presenter = UserAuditTrailPresenter::class;
 
+    public static bool|array $public = true;
+
     public static function related(): array
     {
         return [

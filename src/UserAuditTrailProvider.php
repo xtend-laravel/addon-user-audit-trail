@@ -12,13 +12,18 @@ use Lunar\Hub\Facades\Menu;
 use Lunar\Hub\Menu\MenuLink;
 use UserAuditTrail\Database\Seeders\UserAuditTrailSeeder;
 use XtendLunar\Addons\UserAuditTrail\Livewire\AuditTrail\Table;
+use XtendLunar\Addons\UserAuditTrail\Models\UserAuditEvent;
+use XtendLunar\Addons\UserAuditTrail\Models\UserAuditTrail;
+use XtendLunar\Addons\UserAuditTrail\Policies\UserAuditEventPolicy;
+use XtendLunar\Addons\UserAuditTrail\Policies\UserAuditTrailPolicy;
 
 class UserAuditTrailProvider extends XtendAddonProvider
 {
     use InteractsWithRestifyRepositories;
 
     protected $policies = [
-
+        UserAuditTrail::class => UserAuditTrailPolicy::class,
+        UserAuditEvent::class => UserAuditEventPolicy::class,
     ];
 
     public function register()

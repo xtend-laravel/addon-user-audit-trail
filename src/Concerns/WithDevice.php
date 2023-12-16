@@ -8,7 +8,7 @@ trait WithDevice
 {
     protected function getAgentInfo(): array
     {
-        $agent = new Agent();;
+        $agent = new Agent();
         $browser = $agent->browser();
         $platform = $agent->platform();
         return [

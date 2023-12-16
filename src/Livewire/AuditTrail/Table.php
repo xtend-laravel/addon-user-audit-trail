@@ -5,6 +5,7 @@ namespace XtendLunar\Addons\UserAuditTrail\Livewire\AuditTrail;
 use App\Models\User;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -25,19 +26,30 @@ class Table extends Component implements HasTable
     public function getTableColumns(): array
     {
         return [
-            TextColumn::make('name'),
-            BadgeColumn::make('type'),
+            IconColumn::make('user_id')
+                ->options([
+                    'heroicon-o-x-circle',
+                    'heroicon-o-check' => fn ($state, $record): bool => $record->user_id > 0,
+                ])
+                ->colors([
+                    'secondary',
+                    'danger' => 'draft',
+                    'warning' => 'reviewing',
+                    'success' => 'published',
+                ]),
             TextColumn::make('ip_address'),
             TextColumn::make('country'),
             TextColumn::make('device'),
-            TextColumn::make('location'),
+            TextColumn::make('location')->wrap(),
+            BadgeColumn::make('events_count')
+                ->counts('events'),
         ];
     }
 
     public function getTableActions(): array
     {
         return [
-            ViewAction::make()->url(fn($record) => $record->link)->openUrlInNewTab(),
+            ViewAction::make()->url(fn($record) => $record->link),
         ];
     }
 

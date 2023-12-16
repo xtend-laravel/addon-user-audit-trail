@@ -16,7 +16,8 @@ class UserAuditTrailSeeder extends Seeder
     public function run()
     {
         UserAuditTrail::factory()->count(50)->has(
-            UserAuditEvent::factory()->count(rand(2, 10)),
+            factory: UserAuditEvent::factory()->count(rand(2, 10)),
+            relationship: 'events',
         )->create();
     }
 }

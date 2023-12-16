@@ -5,6 +5,7 @@ namespace XtendLunar\Addons\UserAuditTrail\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use UserAuditTrail\Database\Factories\UserAuditEventFactory;
 
 class UserAuditEvent extends Model
 {
@@ -17,8 +18,8 @@ class UserAuditEvent extends Model
         'exception' => 'array',
     ];
 
-    public function events(): HasMany
+    protected static function newFactory(): UserAuditEventFactory
     {
-        return $this->hasMany(UserAuditEvent::class);
+        return UserAuditEventFactory::new();
     }
 }

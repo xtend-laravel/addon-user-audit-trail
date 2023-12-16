@@ -22,7 +22,7 @@ class UserAuditEventFactory extends Factory
                 'message' => $this->faker->sentence,
                 'code' => $this->faker->randomElement([500, 404, 403, 401]),
             ],
-            'visits_nb' => $this->faker->randomNumber(100),
+            'visits_nb' => $this->faker->randomNumber(3),
             'last_visited_at' => $this->faker->dateTime,
             'last_visit_duration' => $this->faker->randomNumber(),
         ];

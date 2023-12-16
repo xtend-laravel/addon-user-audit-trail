@@ -6,4 +6,5 @@ use XtendLunar\Addons\RestifyApi\Restify\Repository;
 
 class UserAuditEventRepository extends Repository
 {
+    public static bool|array $public = true;
 }
