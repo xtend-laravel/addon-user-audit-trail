@@ -61,7 +61,7 @@ class Table extends Component implements HasTable
     protected function getTableFilters(): array
     {
         return [
-            Filter::make('created_at')
+            Filter::make('updated_at')
                 ->form([
                     DatePicker::make('created_from')->default(now()->subDays(7)),
                     DatePicker::make('created_until')->default(now()),
