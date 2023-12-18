@@ -42,6 +42,8 @@ class Table extends Component implements HasTable
                 ]),
             TextColumn::make('ip_address')->searchable(),
             TextColumn::make('country'),
+            TextColumn::make('region')
+                ->formatStateUsing(fn ($state, $record) => $record->region === 'N/A' ? '--' : $record->region),
             TextColumn::make('device'),
             TextColumn::make('location')->wrap(),
             TextColumn::make('download_speed')
