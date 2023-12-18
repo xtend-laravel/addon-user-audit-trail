@@ -37,7 +37,7 @@ class Table extends Component implements HasTable
                     'warning' => 'reviewing',
                     'success' => 'published',
                 ]),
-            TextColumn::make('ip_address'),
+            TextColumn::make('ip_address')->searchable(),
             TextColumn::make('country'),
             TextColumn::make('device'),
             TextColumn::make('location')->wrap(),
