@@ -9,6 +9,9 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Livewire\Component;
@@ -49,6 +52,30 @@ class Table extends Component implements HasTable
                 ->formatStateUsing(fn ($state, $record) => $this->getTotalSiteDuration($record)),
             BadgeColumn::make('events_count')
                 ->counts('events'),
+        ];
+    }
+
+    protected function getTableFilters(): array
+    {
+        return [
+            TernaryFilter::make('download_speed')
+                ->placeholder('Connection speed')
+                ->trueLabel('Slow connection speed')
+                ->falseLabel('Fast connection speed')
+                ->queries(
+                    true: fn (Builder $query) => $query
+                        ->where('estimated_download_speed', '>', 0)
+                        ->where('estimated_download_speed', '<', 50),
+                    false: fn (Builder $query) => $query
+                        ->where('estimated_download_speed', '>', 50),
+                    blank: fn (Builder $query) => $query
+                        ->where('estimated_download_speed', '>', 0),
+                ),
+            SelectFilter::make('country')
+                ->options(fn () => UserAuditTrail::query()->distinct()->pluck('country', 'country')->toArray()),
+
+            SelectFilter::make('region')
+                ->options(fn () => UserAuditTrail::query()->distinct()->pluck('region', 'region')->toArray()),
         ];
     }
 

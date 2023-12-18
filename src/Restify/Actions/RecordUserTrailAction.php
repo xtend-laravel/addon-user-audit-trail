@@ -31,6 +31,7 @@ class RecordUserTrailAction extends Action
             'referer' => $request->server('HTTP_REFERER'),
             'device' => $data['device'],
             'country' => $data['country'],
+            'region' => $data['region'],
         ]);
     }
 
@@ -38,13 +39,13 @@ class RecordUserTrailAction extends Action
     {
         $device = $this->getAgentInfo();
         $location = $this->getLocation($client_ip);
-        $country = $this->getCountry($client_ip);
 
         return [
             'user_id' => $request->user()?->id,
             'device' => $device,
             'location' => $location,
-            'country' => $country,
+            'country' => $location['country'],
+            'region' => $location['region_name'] ?? 'N/A',
             'route_tracking' => $request->routeTracking,
             'estimated_download_speed' => $request->estimatedDownloadSpeed,
         ];

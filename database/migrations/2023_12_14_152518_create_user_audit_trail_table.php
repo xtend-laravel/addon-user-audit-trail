@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable();
             $table->ipAddress()->nullable();
             $table->string('country')->nullable();
+            $table->string('region')->nullable();
             $table->json('device')->nullable();
             $table->json('location')->nullable();
             $table->json('route_tracking')->nullable();

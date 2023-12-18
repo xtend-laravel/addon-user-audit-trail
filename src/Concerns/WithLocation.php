@@ -11,6 +11,7 @@ trait WithLocation
         if ($location['status'] === 'fail') {
             return [
                 'country' => 'Unknown',
+                'region_name' => 'N/A',
             ];
         }
 

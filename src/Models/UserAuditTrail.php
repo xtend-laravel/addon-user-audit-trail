@@ -26,6 +26,7 @@ class UserAuditTrail extends Model
         'user_id',
         'ip_address',
         'country',
+        'region',
         'device',
         'location',
         'route_tracking',
