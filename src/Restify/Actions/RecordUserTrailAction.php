@@ -25,6 +25,8 @@ class RecordUserTrailAction extends Action
             'device' => $this->getAgentInfo(),
             'location' => $this->getLocation($clientIp),
             'country' => $this->getCountry($clientIp),
+            'route_tracking' => $request->routeTracking,
+            'estimated_download_speed' => $request->estimatedDownloadSpeed,
         ]);
 
         return ok();

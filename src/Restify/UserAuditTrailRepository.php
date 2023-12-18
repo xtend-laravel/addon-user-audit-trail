@@ -9,6 +9,7 @@ use XtendLunar\Addons\UserAuditTrail\Models\UserAuditTrail;
 use XtendLunar\Addons\UserAuditTrail\Restify\Actions\IncrementUserEventVisitAction;
 use XtendLunar\Addons\UserAuditTrail\Restify\Actions\RecordUserEventAction;
 use XtendLunar\Addons\UserAuditTrail\Restify\Actions\RecordUserTrailAction;
+use XtendLunar\Addons\UserAuditTrail\Restify\Getters\UserTrailGetter;
 use XtendLunar\Addons\UserAuditTrail\Restify\Presenters\UserAuditTrailPresenter;
 
 class UserAuditTrailRepository extends Repository
@@ -23,6 +24,13 @@ class UserAuditTrailRepository extends Repository
     {
         return [
             HasMany::make('events', UserAuditEventRepository::class),
+        ];
+    }
+
+    public function getters(RestifyRequest $request): array
+    {
+        return [
+            UserTrailGetter::make(),
         ];
     }
 

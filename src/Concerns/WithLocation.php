@@ -8,8 +8,10 @@ trait WithLocation
     {
         $location = json_decode(file_get_contents("http://ip-api.com/json/{$clientIp}"), true);
 
-        if (!$location) {
-            return [];
+        if ($location['status'] === 'fail') {
+            return [
+                'country' => 'Unknown',
+            ];
         }
 
         return [

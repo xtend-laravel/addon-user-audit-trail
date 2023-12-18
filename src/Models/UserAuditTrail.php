@@ -18,14 +18,18 @@ class UserAuditTrail extends Model
     protected $casts = [
         'device' => 'array',
         'location' => 'array',
+        'route_tracking' => 'array',
+        'estimated_download_speed' => 'float',
     ];
 
     protected $fillable = [
         'user_id',
         'ip_address',
+        'country',
         'device',
         'location',
-        'country',
+        'route_tracking',
+        'estimated_download_speed',
     ];
 
     protected static function newFactory(): UserAuditTrailFactory

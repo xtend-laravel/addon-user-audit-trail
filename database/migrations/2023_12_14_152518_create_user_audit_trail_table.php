@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->json('device')->nullable();
             $table->json('location')->nullable();
+            $table->json('route_tracking')->nullable();
+            $table->float('estimated_download_speed')->nullable();
             $table->timestamps();
         });
     }
