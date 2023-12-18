@@ -44,9 +44,29 @@ class Table extends Component implements HasTable
             TextColumn::make('download_speed')
                 ->label('Est. Download Speed')
                 ->formatStateUsing(fn ($state, $record) => $record->estimated_download_speed . ' Mbps'),
+            TextColumn::make('avg_site_duration')
+                ->label('Avg. Site duration')
+                ->formatStateUsing(fn ($state, $record) => $this->getTotalSiteDuration($record)),
             BadgeColumn::make('events_count')
                 ->counts('events'),
         ];
+    }
+
+    protected function getTotalSiteDuration(UserAuditTrail $record): string
+    {
+        $routes = $record->route_tracking;
+
+        if (!$routes) {
+            return '0s';
+        }
+
+        $totalDuration = 0;
+
+        foreach ($routes as $route) {
+            $totalDuration += $route['totalDuration'];
+        }
+
+        return $totalDuration . 's';
     }
 
     public function getTableActions(): array

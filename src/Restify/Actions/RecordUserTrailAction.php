@@ -45,8 +45,8 @@ class RecordUserTrailAction extends Action
             'device' => $device,
             'location' => $location,
             'country' => $country,
-            'route_tracking' => $request->route_tracking,
-            'estimated_download_speed' => $request->estimated_download_speed,
+            'route_tracking' => $request->routeTracking,
+            'estimated_download_speed' => $request->estimatedDownloadSpeed,
         ];
     }
 }
