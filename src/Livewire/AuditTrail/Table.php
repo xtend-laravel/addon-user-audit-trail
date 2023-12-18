@@ -41,6 +41,9 @@ class Table extends Component implements HasTable
             TextColumn::make('country'),
             TextColumn::make('device'),
             TextColumn::make('location')->wrap(),
+            TextColumn::make('download_speed')
+                ->label('Est. Download Speed')
+                ->formatStateUsing(fn ($state, $record) => $record->estimated_download_speed . ' Mbps'),
             BadgeColumn::make('events_count')
                 ->counts('events'),
         ];
@@ -49,7 +52,11 @@ class Table extends Component implements HasTable
     public function getTableActions(): array
     {
         return [
-            ViewAction::make()->url(fn($record) => $record->link),
+            ViewAction::make()
+                ->url(fn($record) => $record->link)
+                ->modalContent(fn($record) => view('xtend-lunar-user-audit-trail::livewire.pages.user-audit-trail.detail', [
+                    'userAuditTrail' => $record,
+                ])),
         ];
     }
 

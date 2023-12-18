@@ -8,7 +8,7 @@ class UserAuditTrailIndex extends Component
 {
     public function render()
     {
-        return view('xtend-lunar-user-audit-trail::livewire.pages.merchant-products.index')
+        return view('xtend-lunar-user-audit-trail::livewire.pages.user-audit-trail.index')
             ->layout('adminhub::layouts.app');
     }
 }
