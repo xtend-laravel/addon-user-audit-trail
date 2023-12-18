@@ -104,6 +104,7 @@ class Table extends Component implements HasTable
         return [
             ViewAction::make()
                 ->url(fn($record) => $record->link)
+                ->modalWidth('6xl')
                 ->modalContent(fn($record) => view('xtend-lunar-user-audit-trail::livewire.pages.user-audit-trail.detail', [
                     'userAuditTrail' => $record,
                 ])),
