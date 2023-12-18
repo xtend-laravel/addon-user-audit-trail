@@ -2,15 +2,12 @@
 
 namespace XtendLunar\Addons\UserAuditTrail\Livewire\AuditTrail;
 
-use App\Models\User;
-use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -61,11 +58,6 @@ class Table extends Component implements HasTable
     protected function getTableFilters(): array
     {
         return [
-            Filter::make('updated_at')
-                ->form([
-                    DatePicker::make('created_from')->default(now()->subDays(7)),
-                    DatePicker::make('created_until')->default(now()),
-                ]),
             TernaryFilter::make('download_speed')
                 ->placeholder('Connection speed')
                 ->trueLabel('Slow connection speed')
