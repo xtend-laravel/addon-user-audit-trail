@@ -39,15 +39,18 @@ class Table extends Component implements HasTable
                     'success' => 'published',
                 ]),
             TextColumn::make('ip_address')->searchable(),
-            TextColumn::make('country'),
+            TextColumn::make('country')->sortable(),
             TextColumn::make('region')
+                ->sortable()
                 ->formatStateUsing(fn ($state, $record) => $record->region === 'N/A' ? '--' : $record->region),
             TextColumn::make('device'),
             TextColumn::make('location')->wrap(),
             TextColumn::make('download_speed')
+                ->sortable(['estimated_download_speed'])
                 ->label('Est. Download Speed')
                 ->formatStateUsing(fn ($state, $record) => $record->estimated_download_speed . ' Mbps'),
             TextColumn::make('avg_site_duration')
+                ->sortable(['route_tracking->totalDuration'])
                 ->label('Avg. Site duration')
                 ->formatStateUsing(fn ($state, $record) => $this->getTotalSiteDuration($record)),
             BadgeColumn::make('events_count')
