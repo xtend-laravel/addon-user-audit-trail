@@ -30,7 +30,7 @@ class UserAuditTrailRepository extends Repository
     public function getters(RestifyRequest $request): array
     {
         return [
-            UserTrailGetter::make(),
+            UserTrailGetter::make()->withoutMiddleware('auth:sanctum'),
         ];
     }
 
